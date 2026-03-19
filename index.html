@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sunny Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0e0e0e;
+      --bg2: #151515;
+      --bg3: #1c1c1c;
+      --border: #2a2a2a;
+      --text: #e8e3db;
+      --text-muted: #a09b96;
+      --text-dim: #6a6560;
+      --accent: #c8a96e;
+      --accent-soft: rgba(200, 169, 110, 0.08);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', Georgia, sans-serif;
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(to bottom, var(--bg) 60%, transparent);
+    }
+
+    .nav-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-weight: 300;
+      font-size: 1.1rem;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.5s forwards;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.7s forwards;
+    }
+
+    .nav-links a {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-line {
+      position: absolute;
+      top: 0; bottom: 0;
+      right: 38%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    }
+
+    .hero-content {
+      max-width: 560px;
+      opacity: 0;
+      animation: slideUp 1s ease 0.3s forwards;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(3.5rem, 7vw, 6rem);
+      font-weight: 300;
+      line-height: 1.0;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    .hero-name em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      max-width: 460px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .btn-primary {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.75rem 1.75rem;
+      text-decoration: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-ghost {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .btn-ghost:hover { color: var(--text); }
+
+    .hero-aside {
+      position: absolute;
+      right: 3rem;
+      bottom: 4rem;
+      width: 30%;
+      max-width: 300px;
+      opacity: 0;
+      animation: fadeIn 1s ease 1s forwards;
+    }
+
+    .hero-aside-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+
+    .hero-aside-text {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .hero-aside-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .hero-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.45rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .hero-stat:last-child { border-bottom: none; }
+
+    .hero-stat-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    .hero-stat-value {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    .hero-aside-links-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-bottom: 1.5rem;
+      border: 1px solid var(--border);
+    }
+
+    .hero-link-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.45rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: background 0.2s ease;
+    }
+
+    .hero-link-item:last-child { border-bottom: none; }
+
+    .hero-link-item:hover { background: var(--accent-soft); }
+
+    .hero-link-icon {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      width: 1rem;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    .hero-link-text {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .hero-link-item:hover .hero-link-text { color: var(--text); }
+
+    .hero-aside-card {
+      border: 1px solid var(--border);
+      padding: 1.25rem;
+      background: var(--bg2);
+    }
+
+    .hero-aside-card-category {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-aside-card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-aside-card-desc {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    .hero-aside-links {
+      display: flex;
+      gap: 1.25rem;
+      align-items: center;
+    }
+
+    .hero-aside-read {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .hero-aside-read:hover { border-bottom-color: var(--accent); }
+
+    .hero-aside-all {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .hero-aside-all:hover {
+      color: var(--text-muted);
+      border-bottom-color: var(--text-muted);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 3rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      opacity: 0;
+      animation: fadeIn 1s ease 1.5s forwards;
+    }
+
+    .scroll-hint span {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--text-dim);
+    }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 6rem 3rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-num {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+    }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ABOUT ── */
+    #about .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-main p {
+      color: var(--text-muted);
+      margin-bottom: 1.25rem;
+      font-size: 0.95rem;
+    }
+
+    .about-main p strong { color: var(--text); font-weight: 400; }
+
+    .about-stats {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stat-item {
+      padding: 1.25rem 1.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .stat-item:hover {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .stat-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-value {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    /* ── RESEARCH ── */
+    .research-entries {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .research-entry {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 2rem;
+      padding: 2.5rem 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .research-entry::before {
+      content: '';
+      position: absolute;
+      left: -3rem; right: -3rem;
+      top: 0; bottom: 0;
+      background: var(--accent-soft);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .research-entry:hover::before { opacity: 1; }
+
+    .entry-meta { padding-top: 0.2rem; }
+
+    .entry-period {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .entry-org {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    .entry-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      line-height: 1.2;
+    }
+
+    .entry-desc {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 1rem;
+    }
+
+    .entry-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      padding: 0.3rem 0.65rem;
+      transition: color 0.3s ease, border-color 0.3s ease;
+    }
+
+    .research-entry:hover .tag {
+      color: var(--text-muted);
+      border-color: var(--accent);
+    }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pub-item {
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      position: relative;
+    }
+
+    .pub-item::before {
+      content: '';
+      position: absolute;
+      left: -3rem; right: -3rem;
+      top: 0; bottom: 0;
+      background: var(--accent-soft);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .pub-item:hover::before { opacity: 1; }
+
+    .pub-num {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      line-height: 1;
+      padding-top: 0.15rem;
+    }
+
+    .pub-journal {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+    }
+
+    .pub-badge {
+      display: inline-block;
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.15rem 0.5rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+    }
+
+    .pub-badge.review {
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    .pub-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.15rem;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+      font-style: italic;
+    }
+
+    .pub-authors {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .pub-authors strong {
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    /* ── SCICOMM ── */
+    .scicomm-intro {
+      max-width: 560px;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 3rem;
+      line-height: 1.8;
+    }
+
+    .scicomm-category { margin-bottom: 3.5rem; }
+
+    .scicomm-cat-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .scicomm-cat-num {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+    }
+
+    .scicomm-cat-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .scicomm-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 1rem;
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .card-link:hover { border-bottom-color: var(--accent); }
+
+    .scicomm-card {
+      border: 1px solid var(--border);
+      background: var(--bg2);
+      padding: 2rem 1.75rem;
+      transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+    }
+
+    .scicomm-card:hover {
+      border-color: var(--accent);
+      background: var(--bg3);
+      transform: translateY(-3px);
+    }
+
+    .scicomm-card.coming-soon { opacity: 0.4; }
+
+    .card-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+
+    .card-category {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.2rem;
+      font-weight: 400;
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .org-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+
+    .org-link:hover {
+      color: var(--accent);
+      border-bottom-color: var(--accent);
+    }
+
+    .inline-link {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    .inline-link:hover {
+      border-bottom-color: var(--accent);
+    }
+
+    .coming-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 1rem;
+      display: block;
+    }
+
+    /* ── STUDIO ── */
+    .studio-empty {
+      padding: 3rem 0;
+      border: 1px dashed var(--border);
+      text-align: center;
+    }
+
+    .studio-empty-label {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* ── CONTACT ── */
+    #contact {
+      text-align: center;
+      padding: 6rem 3rem 8rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .contact-eyebrow {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-heading {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .contact-heading em { font-style: italic; color: var(--accent); }
+
+    .contact-sub {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.8;
+    }
+
+    .contact-email {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent);
+      padding-bottom: 2px;
+      transition: opacity 0.3s ease;
+      display: inline-block;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-email:hover { opacity: 0.7; }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-link:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-family: 'DM Mono', 'Courier New', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      color: var(--text-dim);
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.hidden {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .nav-links { gap: 1.25rem; }
+      .nav-links a { font-size: 0.6rem; }
+      section { padding: 4rem 1.5rem; }
+      #hero { padding: 7rem 1.5rem 4rem; }
+      .hero-line, .hero-aside { display: none; }
+      #about .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .research-entry { grid-template-columns: 1fr; gap: 0.75rem; }
+      .pub-item { grid-template-columns: 40px 1fr; gap: 1rem; }
+      .scicomm-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-name">Sunny Yadav</a>
+    <ul class="nav-links">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#scicomm">Sci-Comm</a></li>
+      <li><a href="#studio">Studio</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-line"></div>
+    <div class="hero-content">
+      <h1 class="hero-name">Sunny<br /><em>Yadav</em></h1>
+      <p class="hero-tagline">
+        Hi, I'm Sunny. I'm currently a Research Technician in Dr. Maria Schumacher's structural biology lab at Duke. My research interests are in the molecular biology of phage-host interactions, particularly the proteins and pathways that make up bacterial immune systems and the phage-encoded proteins that counter them.
+      </p>
+      <div class="hero-cta">
+        <a href="#research" class="btn-primary">View Research</a>
+        <a href="#contact" class="btn-ghost">Get in Touch →</a>
+      </div>
+    </div>
+    <div class="hero-aside">
+      <div class="hero-aside-stats">
+        <div class="hero-stat"><span class="hero-stat-label">Degree</span><span class="hero-stat-value">B.S. Cellular &amp; Molecular Biology</span></div>
+        <div class="hero-stat"><span class="hero-stat-label">Minors</span><span class="hero-stat-value">Chemistry and Visual Arts</span></div>
+        <div class="hero-stat"><span class="hero-stat-label">Institution</span><span class="hero-stat-value">University of Toledo</span></div>
+        <div class="hero-stat"><span class="hero-stat-label">Graduated</span><span class="hero-stat-value">December 2024</span></div>
+        <div class="hero-stat"><span class="hero-stat-label">Publications</span><span class="hero-stat-value">3</span></div>
+      </div>
+      <div class="hero-aside-links-block">
+        <a href="/cdn-cgi/l/email-protection#2c5f5942425502554d484d5a6c4859474902494859" class="hero-link-item">
+          <span class="hero-link-icon">✉</span><span class="hero-link-text"><span class="__cf_email__" data-cfemail="4b383e25253265322a2f2a3d0b2f3e202e652e2f3e">[email&#160;protected]</span></span>
+        </a>
+        <a href="https://www.linkedin.com/in/sunny-yadav-/" target="_blank" class="hero-link-item">
+          <span class="hero-link-icon">in</span><span class="hero-link-text">LinkedIn</span>
+        </a>
+        <a href="https://orcid.org/0009-0009-4678-7594" target="_blank" class="hero-link-item">
+          <span class="hero-link-icon">○</span><span class="hero-link-text">ORCID</span>
+        </a>
+        <a href="https://scholar.google.com/citations?hl=en&user=oeui9g0AAAAJ" target="_blank" class="hero-link-item">
+          <span class="hero-link-icon">◈</span><span class="hero-link-text">Google Scholar</span>
+        </a>
+        <a href="https://github.com/sunnyyadav" target="_blank" class="hero-link-item">
+          <span class="hero-link-icon">⌥</span><span class="hero-link-text">GitHub</span>
+        </a>
+        <a href="#" class="hero-link-item">
+          <span class="hero-link-icon">↓</span><span class="hero-link-text">Download CV</span>
+        </a>
+      </div>
+      <p class="hero-aside-label">Latest from Sci-Comm</p>
+      <div class="hero-aside-card">
+        <p class="hero-aside-card-category">Illustrated</p>
+        <p class="hero-aside-card-title">How CRISPR-Cas Systems Work</p>
+        <p class="hero-aside-card-desc">From bacterial immune memory to programmable genome editing — a three-page visual breakdown.</p>
+        <div class="hero-aside-links">
+          <a href="crispr_explainer.html" class="hero-aside-read">Read →</a>
+          <a href="#scicomm" class="hero-aside-all">View all</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="section-header reveal">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Research</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="research-entries">
+
+      <div class="research-entry reveal">
+        <div class="entry-meta">
+          <div class="entry-period">Feb 2025 – Present</div>
+          <div class="entry-org"><a href="https://sites.duke.edu/schumacherlab/" target="_blank" class="org-link">Schumacher Lab</a><br /><a href="https://www.biochem.duke.edu" target="_blank" class="org-link">Duke University</a><br />Dept. of Biochemistry</div>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Structural Biology and Protein Biochemistry</h3>
+          <p class="entry-desc">In the Schumacher Lab, I contribute to the structural and biochemical characterization of bacterial proteins to elucidate their functions at atomic resolution.</p><p class="entry-desc">My work involves two primary projects: investigating the transcription activation mechanism of DriD, a WYL-domain activator in the noncanonical DNA damage response pathway of <em>Caulobacter crescentus</em> (in press, <em>Science Advances</em>), and characterizing GapR nucleoid-associated proteins — revealing how a phage-encoded GapR forms inhibitory hetero-oligomers with its host homolog to disrupt DNA binding (submitted to <em>Nature Communications</em>). My primary techniques are high-throughput protein purification and Size Exclusion Chromatography (SEC) to isolate stable protein complexes for structural analysis.</p>
+        </div>
+      </div>
+
+      <div class="research-entry reveal">
+        <div class="entry-meta">
+          <div class="entry-period">May 2023 – Dec 2024</div>
+          <div class="entry-org"><a href="https://www.utoledo.edu/nsm/envsciences/faculty/weintraub.html" target="_blank" class="org-link">Weintraub Lab</a><br /><a href="https://www.utoledo.edu" target="_blank" class="org-link">University of Toledo</a><br />Dept. of Environmental Sciences</div>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Coastal Biogeochemistry and Interface Dynamics</h3>
+          <p class="entry-desc">In the Weintraub Lab, I contributed to the multi-institutional <a href="https://compass.pnnl.gov" target="_blank" class="inline-link">COMPASS-FME</a> project, working with Drs. Roberta Bittencourt-Peixoto and Fausto Machado-Silva to quantify biogeochemical shifts at Terrestrial-Aquatic Interfaces (TAI) — transition zones between land and water that compress and expand with lake and sea level changes.</p><p class="entry-desc">My work focused on the biogeochemical mechanisms of ghost forest formation, the progressive die-off of upland trees as rising water tables drive soil saturation, triggering methane release and disrupting nutrient cycling. I carried out large-scale field sampling regimes, collecting high-resolution data on CO₂ and CH₄ fluxes using LI-8200 Smart Chambers and monitoring real-time soil physicochemical conditions to track redox potential and oxygen dynamics. Alongside fieldwork, I managed extensive laboratory efforts including porewater extraction via rhizons and lysimeters, total reducing sugar assays, and spectrophotometric analyses of iron and sulfide.</p>
+        </div>
+      </div>
+
+      <div class="research-entry reveal">
+        <div class="entry-meta">
+          <div class="entry-period">Aug 2022 – May 2023</div>
+          <div class="entry-org"><a href="https://www.utoledo.edu/nsm/bio/research/gray.html" target="_blank" class="org-link">Gray Lab</a><br /><a href="https://www.utoledo.edu" target="_blank" class="org-link">University of Toledo</a><br />Dept. of Biological Sciences</div>
+        </div>
+        <div class="entry-body">
+          <h3 class="entry-title">Plant Molecular Genetics and Gene Regulation</h3>
+          <p class="entry-desc">In the Gray Lab, I contributed to a large-scale mapping effort of the gene regulatory networks (GRNs) controlling the maize phenylpropanoid pathway, a biosynthetic pathway essential for plant structural integrity and defense.</p><p class="entry-desc">As part of a high-throughput Yeast One-Hybrid (Y1H) pipeline, I identified over 50 transcription factors and uncovered more than 20 novel regulatory interactions. My work specifically focused on validating MYBR87 and DOF3 as key regulators of lignin biosynthesis, contributing to a mechanistic understanding of how transcriptional control shapes crop resilience.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="section-header reveal">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Publications</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="pub-list">
+
+      <div class="pub-item reveal">
+        <div class="pub-num">01</div>
+        <div>
+          <div class="pub-journal">Nature Communications <span class="pub-badge review">In Review</span></div>
+          <p class="pub-title">"A phage encoded GapR nucleoid-associated protein binds a bacterial GapR to deactivate it via an inhibitory hetero-oligomer mechanism."</p>
+          <p class="pub-authors">Schumacher, M.A., Salinas, R., <strong>Yadav, S.</strong>, Leung, K., Ellis, P.K., Zhang, H., &amp; Guo, M.S.</p>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-num">02</div>
+        <div>
+          <div class="pub-journal">Science Advances <span class="pub-badge review">In Press</span></div>
+          <p class="pub-title">"Transcription activation mechanism of a noncanonical DNA damage response pathway by the WYL-activator, DriD."</p>
+          <p class="pub-authors">Singh, R.R., Chinni, A., Cannistraci, E., Salinas, R., <strong>Yadav, S.</strong>, Gozzi, K., &amp; Schumacher, M.A.</p>
+        </div>
+      </div>
+
+      <div class="pub-item reveal">
+        <div class="pub-num">03</div>
+        <div>
+          <div class="pub-journal">BioEssays <span class="pub-badge">2025</span></div>
+          <p class="pub-title">"The Known and Unknown About Female Reproductive Tract Mucus Rheological Properties."</p>
+          <p class="pub-authors">Achinger, L., Kluczynski, D.F., Gladwell, A., Heck, H., Zhang, F., Good, E., Waggoner, A., Reinhart, M., Good, M., Moore, D., Filatoff, D., Dhar, S., Nigro, E., Flanagan, L., <strong>Yadav, S.</strong>, Williams, T., Ray, A., Shah, T.A., Liberatore, M.W., &amp; Avidor-Reiss, T.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCICOMM -->
+  <section id="scicomm">
+    <div class="section-header reveal">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Sci-Comm</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="scicomm-intro reveal">
+      Science shouldn't live only in journals. This space is dedicated to translating complex biology into clear, visual, and compelling stories — through illustrated articles, visual explainers, research highlights, technique guides, and personal essays.
+    </p>
+
+    <!-- ILLUSTRATED -->
+    <div class="scicomm-category reveal">
+      <div class="scicomm-cat-header">
+        <span class="scicomm-cat-num">01</span>
+        <span class="scicomm-cat-label">Illustrated</span>
+      </div>
+      <div class="scicomm-grid">
+        <div class="scicomm-card reveal">
+          <div class="card-icon">◷</div>
+          <div class="card-category">Illustrated</div>
+          <h3 class="card-title">What Mucus Does in the Female Reproductive Tract</h3>
+          <p class="card-desc">Mucins, rheology, viscosity gradients, and the open questions in reproductive biology — a fully illustrated review article.</p>
+          <a href="mucus_article_final.html" class="card-link">Read →</a>
+        </div>
+        <div class="scicomm-card reveal">
+          <div class="card-icon">⬡</div>
+          <div class="card-category">Illustrated</div>
+          <h3 class="card-title">How CRISPR-Cas Systems Work</h3>
+          <p class="card-desc">From bacterial immune memory to programmable genome editing — a bold three-page visual breakdown of CRISPR biology.</p>
+          <a href="crispr_explainer.html" class="card-link">Read →</a>
+        </div>
+        <div class="scicomm-card coming-soon reveal">
+          <div class="card-icon">◈</div>
+          <div class="card-category">Coming Soon</div>
+          <h3 class="card-title">Bacterial Defense Systems, Visualized</h3>
+          <p class="card-desc">Restriction-modification, CRISPR, and beyond — how bacteria fight back against phage.</p>
+          <span class="coming-label">— In progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- METHODS -->
+    <div class="scicomm-category reveal">
+      <div class="scicomm-cat-header">
+        <span class="scicomm-cat-num">02</span>
+        <span class="scicomm-cat-label">Methods</span>
+      </div>
+      <div class="scicomm-grid">
+        <div class="scicomm-card reveal">
+          <div class="card-icon">◎</div>
+          <div class="card-category">Methods</div>
+          <h3 class="card-title">How to Purify a Protein</h3>
+          <p class="card-desc">His-tag affinity chromatography, metal resin selection, and size exclusion — a fully illustrated three-page technique guide.</p>
+          <a href="protein_purification.html" class="card-link">Read →</a>
+        </div>
+        <div class="scicomm-card coming-soon reveal">
+          <div class="card-icon">◬</div>
+          <div class="card-category">Coming Soon</div>
+          <h3 class="card-title">Yeast One-Hybrid Screening</h3>
+          <p class="card-desc">How researchers identify transcription factors that bind specific DNA sequences — the technique behind my Gray Lab work.</p>
+          <span class="coming-label">— In progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSIGHTS -->
+    <div class="scicomm-category reveal">
+      <div class="scicomm-cat-header">
+        <span class="scicomm-cat-num">03</span>
+        <span class="scicomm-cat-label">Insights</span>
+      </div>
+      <div class="scicomm-grid">
+        <div class="scicomm-card coming-soon reveal">
+          <div class="card-icon">▲</div>
+          <div class="card-category">Coming Soon</div>
+          <h3 class="card-title">The DriD Story</h3>
+          <p class="card-desc">An illustrated narrative of our Science Advances paper — how a bacterial protein activates a noncanonical DNA damage response.</p>
+          <span class="coming-label">— In progress</span>
+        </div>
+        <div class="scicomm-card coming-soon reveal">
+          <div class="card-icon">◉</div>
+          <div class="card-category">Coming Soon</div>
+          <h3 class="card-title">The Phenylpropanoid Pathway in Maize</h3>
+          <p class="card-desc">The regulatory network behind plant secondary metabolism — drawn from my Gray Lab Y1H work.</p>
+          <span class="coming-label">— In progress</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERSPECTIVES -->
+    <div class="scicomm-category reveal">
+      <div class="scicomm-cat-header">
+        <span class="scicomm-cat-num">04</span>
+        <span class="scicomm-cat-label">Perspectives</span>
+      </div>
+      <div class="scicomm-grid">
+        <div class="scicomm-card coming-soon reveal">
+          <div class="card-icon">✦</div>
+          <div class="card-category">Coming Soon</div>
+          <h3 class="card-title">Essays and Blog</h3>
+          <p class="card-desc">Personal takes on science, research life, papers I'm reading, and questions I can't stop thinking about.</p>
+          <span class="coming-label">— In progress</span>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- STUDIO -->
+  <section id="studio">
+    <div class="section-header reveal">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Studio</h2>
+      <div class="section-rule"></div>
+    </div>
+    <p class="scicomm-intro reveal">
+      A space where science meets making — molecular art, scientific illustration, code-based projects, sculpture, photography, and experiments that don't fit neatly anywhere else.
+    </p>
+    <div class="studio-empty reveal">
+      <span class="studio-empty-label">— Coming soon</span>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <p class="contact-eyebrow reveal">Let's connect</p>
+    <h2 class="contact-heading reveal">Say <em>hello</em></h2>
+    <p class="contact-sub reveal">Whether you're a PI, a collaborator, or just curious about the science — I'd love to hear from you.</p>
+    <a href="/cdn-cgi/l/email-protection#6a191f04041344130b0e0b1c2a0e1f010f440f0e1f" class="contact-email reveal"><span class="__cf_email__" data-cfemail="dcafa9b2b2a5f2a5bdb8bdaa9cb8a9b7b9f2b9b8a9">[email&#160;protected]</span></a>
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/sunny-yadav-/" class="contact-link" target="_blank">LinkedIn</a>
+      <a href="https://scholar.google.com/citations?hl=en&user=oeui9g0AAAAJ" class="contact-link" target="_blank">Google Scholar</a>
+      <a href="https://orcid.org/0009-0009-4678-7594" class="contact-link" target="_blank">ORCID</a>
+      <a href="#" class="contact-link">Download CV</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-text">© 2026 Sunny Yadav</span>
+    <span class="footer-text">Research Technician · Duke University · Durham, NC</span>
+  </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Add hidden class to all reveal elements after page load
+    // so content is visible if JS fails, then animate on scroll
+    window.addEventListener('DOMContentLoaded', () => {
+      const reveals = document.querySelectorAll('.reveal');
+      reveals.forEach(el => el.classList.add('hidden'));
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.classList.remove('hidden');
+              entry.
