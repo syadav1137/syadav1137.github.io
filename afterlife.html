@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Afterlife — Sunny Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=DM+Mono:wght@300;400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;1,8..60,300&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --bg2: #f0ede8;
+      --text: #1a1815;
+      --text-muted: #5a5550;
+      --text-dim: #9a9590;
+      --border: #ddd9d4;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* BACK BAR */
+    .back-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 3rem;
+      display: flex;
+      align-items: center;
+    }
+
+    .back-link {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .back-link:hover { color: var(--text); }
+
+    .back-sep {
+      color: var(--border);
+      margin: 0 0.75rem;
+      font-size: 0.6rem;
+    }
+
+    /* WRAPPER */
+    .page-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 5rem 3rem 8rem;
+    }
+
+    /* SERIES HEADER */
+    .series-header {
+      margin-bottom: 4rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .series-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    .series-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 4rem;
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.5rem;
+    }
+
+    .series-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 2rem;
+    }
+
+    .series-intro {
+      max-width: 580px;
+      font-size: 1rem;
+      line-height: 1.85;
+      color: var(--text-muted);
+    }
+
+    /* PIECES */
+    .piece {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+      padding: 4rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .piece:last-child { border-bottom: none; }
+
+    .piece.reverse { direction: rtl; }
+    .piece.reverse > * { direction: ltr; }
+
+    .piece-image {
+      width: 100%;
+      overflow: hidden;
+      background: var(--bg2);
+    }
+
+    .piece-image img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .piece-image:hover img { transform: scale(1.02); }
+
+    .piece-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .piece-number {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .piece-title {
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 2.5rem;
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--text);
+    }
+
+    .piece-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-top: 1px solid var(--border);
+      padding-top: 1.5rem;
+    }
+
+    .piece-detail-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.45rem 0;
+      border-bottom: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .piece-detail-row:last-child { border-bottom: none; }
+
+    .detail-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.55rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      white-space: nowrap;
+    }
+
+    .detail-value {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: right;
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper { padding: 3rem 1.5rem 5rem; }
+      .piece { grid-template-columns: 1fr; gap: 2rem; }
+      .piece.reverse { direction: ltr; }
+      .series-title { font-size: 3rem; }
+      .back-bar { padding: 0.75rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="back-bar">
+    <a href="index.html" class="back-link">← Back</a>
+    <span class="back-sep">/</span>
+    <a href="index.html#studio" class="back-link">Studio</a>
+  </nav>
+
+  <div class="page-wrapper">
+
+    <!-- SERIES HEADER -->
+    <div class="series-header">
+      <p class="series-eyebrow">Studio · Series</p>
+      <h1 class="series-title">Afterlife</h1>
+      <p class="series-meta">Found Object Sculpture · 3 works · 2024</p>
+      <p class="series-intro">Every object around us is living out a lifespan. When that lifespan ends, it usually ends in landfills, waste plants or forgotten corners. Most objects reach that point quietly and disappear. Afterlife is about the objects that didn't stop there.</p>
+    </div>
+
+    <!-- PIECE 01 -->
+    <div class="piece">
+      <div class="piece-image">
+        <img src="knitknotdry.png" alt="Knit-Knot-Dry" />
+      </div>
+      <div class="piece-info">
+        <p class="piece-number">001</p>
+        <h2 class="piece-title">Knit-Knot-Dry</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIECE 02 -->
+    <div class="piece reverse">
+      <div class="piece-image">
+        <img src="PipetteCity.png" alt="Pipette City" />
+      </div>
+      <div class="piece-info">
+        <p class="piece-number">002</p>
+        <h2 class="piece-title">Pipette City</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- PIECE 03 -->
+    <div class="piece">
+      <div class="piece-image">
+        <img src="NewTenants.png" alt="New Tenants" />
+      </div>
+      <div class="piece-info">
+        <p class="piece-number">003</p>
+        <h2 class="piece-title">New Tenants</h2>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
